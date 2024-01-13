@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <sstream>
 
-
+// MessageBox class
 template<typename T>
 class MessageBox {
 private:
