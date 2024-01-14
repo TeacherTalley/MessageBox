@@ -8,6 +8,7 @@ main
 .vscode
 *.dSYM
 build
+.DS_Store
 
 # User-specific files
 *.rsuser
