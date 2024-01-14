@@ -7,6 +7,7 @@
 main
 .vscode
 *.dSYM
+build
 
 # User-specific files
 *.rsuser
