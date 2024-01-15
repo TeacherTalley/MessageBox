@@ -62,7 +62,7 @@
     },
     {
       "name": "Code formatting",
-      "setup": "",
+      "setup": "pip install cpplint",
       "run": "cpplint *.h *.cpp",
       "input": "",
       "output": "",
