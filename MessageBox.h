@@ -28,7 +28,8 @@
 const int DEFAULT_SIZE = 10;
 
 template<typename T>
-class MessageBox {
+class MessageBox 
+{
  private:
     T* messages; /* Array to store the messages. */
     int mySize; /* Size of the message box. */
@@ -40,7 +41,8 @@ class MessageBox {
      * @brief Constructor for the MessageBox class.
      * @param numEntries The size of the message box (default: DEFAULT_SIZE).
      */
-    MessageBox(int numEntries = DEFAULT_SIZE) {
+    MessageBox(int numEntries = DEFAULT_SIZE) 
+    {
         mySize = numEntries;
         count = 0;
         messages = new T[mySize];
@@ -54,7 +56,8 @@ class MessageBox {
     /**
      * @brief Destructor for the MessageBox class.
      */
-    ~MessageBox() {
+    ~MessageBox() 
+    {
         delete[] messages;
         delete[] emptyBox;
     }
@@ -66,12 +69,15 @@ class MessageBox {
      * @throw std::out_of_range If the index is out of bounds.
      * @throw std::runtime_error If the message box position is already full.
      */
-    void send(int index, const T& message) {
-        if (index < 0 || index >= mySize) {
+    void send(int index, const T& message) 
+    {
+        if (index < 0 || index >= mySize) 
+        {
             throw std::out_of_range("Index out of bounds");
         }
 
-        if (full(index)) {
+        if (full(index)) 
+        {
             throw std::runtime_error("Message box position is full");
         }
 
@@ -87,12 +93,15 @@ class MessageBox {
      * @throw std::out_of_range If the index is out of bounds.
      * @throw std::runtime_error If the message box position is empty.
      */
-    T receive(int index) {
-        if (index < 0 || index >= mySize) {
+    T receive(int index) 
+    {
+        if (index < 0 || index >= mySize) 
+        {
             throw std::out_of_range("Index out of bounds");
         }
 
-        if (empty(index)) {
+        if (empty(index)) 
+        {
             throw std::runtime_error("Message box position is empty");
         }
 
@@ -137,7 +146,6 @@ class MessageBox {
         return count == mySize;
     }
 
-
     /**
      * @brief Checks if a specific message box is empty.
      * @param index The position in the message box.
@@ -149,12 +157,12 @@ class MessageBox {
         return !empty(index);
     }
 
-
     /**
      * @brief Gets the size of the message box.
      * @return The size of the message box.
      */
-    int getSize() const {
+    int getSize() const 
+    {
         return mySize;
     }
 
@@ -162,7 +170,8 @@ class MessageBox {
      * @brief Gets the number of messages in the message box.
      * @return The number of messages in the message box.
      */
-    int getCount() const {
+    int getCount() const 
+    {
         return count;
     }
 
@@ -170,7 +179,8 @@ class MessageBox {
      * @brief Converts the message box to a string representation.
      * @return The string representation of the message box.
      */
-    std::string toString() const {
+    std::string toString() const 
+    {
         std::string result;
         int printed_count = 0;
         for (int i = 0; i < mySize; i++) {
@@ -196,7 +206,6 @@ class MessageBox {
         result = toString();
         std::cout << result << std::endl;
     }
-
 
     /**
      * @brief Prints all message boxes, including empty slots.
@@ -230,7 +239,8 @@ class MessageBox {
  * @return The output stream.
  */
 template<typename T>
-std::ostream& operator<<(std::ostream& os, const MessageBox<T>& messageBox) {
+std::ostream& operator<<(std::ostream& os, const MessageBox<T>& messageBox) 
+{
     os << messageBox.toString();
     return os;
 }
