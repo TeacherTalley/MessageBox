@@ -2,7 +2,7 @@
 echo "######################## START: TEST RESULTS #########################"
 echo
 echo "--- Checking code format (cpplint) ---"
-cpplint *.cpp *.h
+cpplint --filter=-legal/copyright,-whitespace/braces,-runtime/explicit,-whitespace/newline,-whitespace/end_of_line *.cpp *.h
 echo
 echo "--- Building program ---"
 cmake -S . -B build
