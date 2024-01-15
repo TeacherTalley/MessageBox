@@ -40,7 +40,9 @@ class MessageBox {
      * @brief Constructor for the MessageBox class.
      * @param numEntries The size of the message box (default: DEFAULT_SIZE).
      */
-    MessageBox(int numEntries = DEFAULT_SIZE) : mySize(numEntries), count(0) {
+    MessageBox(int numEntries = DEFAULT_SIZE) {
+        mySize = numEntries;
+        count = 0;
         messages = new T[mySize];
         emptyBox = new bool[mySize];
         for (int i = 0; i < mySize; i++) {
@@ -69,7 +71,7 @@ class MessageBox {
             throw std::out_of_range("Index out of bounds");
         }
 
-        if (messages[index] != T()) {
+        if (full(index)) {
             throw std::runtime_error("Message box position is full");
         }
 
@@ -90,7 +92,7 @@ class MessageBox {
             throw std::out_of_range("Index out of bounds");
         }
 
-        if (messages[index] == T()) {
+        if (empty(index)) {
             throw std::runtime_error("Message box position is empty");
         }
 
@@ -123,7 +125,6 @@ class MessageBox {
         {
             throw std::out_of_range("Index out of bounds");
         }
-
         return emptyBox[index] == true;
     }
 
