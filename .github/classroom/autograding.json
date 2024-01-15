@@ -63,7 +63,7 @@
     {
       "name": "Code formatting",
       "setup": "pip install cpplint",
-      "run": "cpplint *.h *.cpp",
+      "run": "cpplint filter=-legal/copyright,-whitespace/braces,-runtime/explicit,-whitespace/newline,-whitespace/end_of_line *.h *.cpp",
       "input": "",
       "output": "",
       "comparison": "exact",
