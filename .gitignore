@@ -5,6 +5,7 @@
 
 # VS Code ignores
 main
+main.exe
 .vscode
 *.dSYM
 build
