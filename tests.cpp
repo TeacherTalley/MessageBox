@@ -1,9 +1,21 @@
+/**
+* ---------------------------------------------------------------------
+* @copyright
+* Copyright 2024 Michelle Talley University of Central Arkansas
+*
+* @author: Michelle Talley
+* @course: Data Structures (CSCI 2320)
+*
+* @file tests.cpp
+* @brief Google Test for MessageBox demonstration program.
+-----------------------------------------------------------------------
+*/
+
 #include <gtest/gtest.h>
 #include <iostream>
 #include <string>
 #include "MessageBox.h"
 
-// Include the MessageBox class here
 
 TEST(MessageBoxTest, SendAndReceive) {
     // Test sending and receiving messages
@@ -41,6 +53,8 @@ TEST(MessageBoxTest, OutOfRange) {
     MessageBox<int> intBox(1);
     EXPECT_THROW(intBox.send(1, 10), std::out_of_range);
     EXPECT_THROW(intBox.receive(1), std::out_of_range);
+    EXPECT_THROW(intBox.empty(1), std::out_of_range);
+    EXPECT_THROW(intBox.full(1), std::out_of_range);
 }
 
 TEST(MessageBoxTest, FullAndEmpty) {
@@ -50,17 +64,28 @@ TEST(MessageBoxTest, FullAndEmpty) {
     stringBox.send(0, "Hello");
     EXPECT_FALSE(stringBox.empty());
     stringBox.send(1, "World");
-    //EXPECT_TRUE(stringBox.full());
+    EXPECT_TRUE(stringBox.full(0));
     stringBox.receive(0);
-    //EXPECT_FALSE(stringBox.full());
+    EXPECT_FALSE(stringBox.full(0));
     stringBox.receive(1);
     EXPECT_TRUE(stringBox.empty());
 
-    MessageBox<int> intBox(1);
+    MessageBox<int> intBox(2);
     EXPECT_TRUE(intBox.empty());
     intBox.send(0, 10);
     EXPECT_FALSE(intBox.empty());
     intBox.receive(0);
+    EXPECT_TRUE(intBox.empty());
+    intBox.send(0, 10);
+    intBox.send(1, 20);
+    EXPECT_FALSE(intBox.empty());
+    EXPECT_TRUE(intBox.full());
+    intBox.receive(0);
+    EXPECT_FALSE(intBox.empty());
+    EXPECT_TRUE(intBox.empty(0));
+    EXPECT_FALSE(intBox.empty(1));
+    intBox.receive(1);
+    EXPECT_TRUE(intBox.empty(1));
     EXPECT_TRUE(intBox.empty());
 }
 
@@ -96,18 +121,16 @@ TEST(MessageBoxTest, Print) {
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Hello World !\n");
 
-    MessageBox<int> intBox(2);
+    MessageBox<int> intBox(3);
     intBox.send(0, 10);
     intBox.send(1, 20);
     testing::internal::CaptureStdout();
     intBox.print();
     output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "10 20\n");
+    // set up the Capture Stdout before each use, else segfault
+    testing::internal::CaptureStdout();
+    intBox.print_verbose();
+    output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "0:10:\n1:20:\n2:<empty>:\n");
 }
-
-/*
-int main(int argc, char** argv) {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}
-*/
