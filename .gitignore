@@ -5,10 +5,12 @@
 
 # VS Code ignores
 main
+tests
 .vscode
 *.dSYM
 build
 .DS_Store
+*AutoTest*
 
 # User-specific files
 *.rsuser
