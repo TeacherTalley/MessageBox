@@ -6,6 +6,8 @@
 # VS Code ignores
 main
 tests
+main.exe
+
 .vscode
 *.dSYM
 build
