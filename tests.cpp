@@ -3,134 +3,77 @@
 * @copyright
 * Copyright 2024 Michelle Talley University of Central Arkansas
 *
-* @author: Michelle Talley
+* @author: <student name>
 * @course: Data Structures (CSCI 2320)
 *
 * @file tests.cpp
-* @brief Google Test for MessageBox demonstration program.
+* @brief Student testing code outside of the required main.cpp.
 -----------------------------------------------------------------------
 */
 
-#include <gtest/gtest.h>
 #include <iostream>
 #include <string>
+#include <stdexcept>
+#include <sstream>
 #include "MessageBox.h"
 
+int main()
+{
+    MessageBox<std::string> stringMessageBox(7);
+ 
+    // Expected exceptions
+    try
+    {
+        std::cout << "Testing send: out of bounds exception." << std::endl;
+        stringMessageBox.send(7, "Hello");
+    }
+    catch (const std::out_of_range &e)
+    {
+        std::cout << "Expected exception: "
+                  << e.what() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << "!!!Unexpected exception occurred: "
+                  << e.what()
+                  << std::endl;
+    }
 
-TEST(MessageBoxTest, SendAndReceive) {
-    // Test sending and receiving messages
-    MessageBox<std::string> stringBox(5);
-    stringBox.send(0, "Hello");
-    stringBox.send(1, "World");
-    stringBox.send(2, "!");
-    EXPECT_EQ(stringBox.receive(0), "Hello");
-    EXPECT_EQ(stringBox.receive(1), "World");
-    EXPECT_EQ(stringBox.receive(2), "!");
+    // Expected exceptions
+    try
+    {
+        std::cout << "Testing full message box location." << std::endl;
+        stringMessageBox.send(0, "Hello");
+        stringMessageBox.send(0, "Howdy");
+    }
+    catch (const std::runtime_error &e)
+    {
+        std::cout << "Expected exception: "
+                  << e.what() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << "!!!Unexpected exception occurred: "
+                  << e.what()
+                  << std::endl;
+    }
 
-    MessageBox<int> intBox(3);
-    intBox.send(0, 10);
-    intBox.send(1, 20);
-    EXPECT_EQ(intBox.receive(0), 10);
-    EXPECT_EQ(intBox.receive(1), 20);
+    try
+    {
+        std::cout << "Testing empty: out of bounds exception." << std::endl;
+        stringMessageBox.empty(7);
+    }
+    catch (const std::out_of_range &e)
+    {
+        std::cout << "Expected exception: "
+                  << e.what() << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << "!!!Unexpected exception occurred: "
+                  << e.what()
+                  << std::endl;
+    }
 
-    MessageBox<float> floatBox(4);
-    floatBox.send(0, 3.14f);
-    floatBox.send(1, 2.718f);
-    floatBox.send(2, 1.618f);
-    floatBox.send(3, 0.577f);
-    EXPECT_EQ(floatBox.receive(0), 3.14f);
-    EXPECT_EQ(floatBox.receive(1), 2.718f);
-    EXPECT_EQ(floatBox.receive(2), 1.618f);
-    EXPECT_EQ(floatBox.receive(3), 0.577f);
-}
-
-TEST(MessageBoxTest, OutOfRange) {
-    // Test out of range index
-    MessageBox<std::string> stringBox(2);
-    EXPECT_THROW(stringBox.send(2, "Hello"), std::out_of_range);
-    EXPECT_THROW(stringBox.receive(2), std::out_of_range);
-
-    MessageBox<int> intBox(1);
-    EXPECT_THROW(intBox.send(1, 10), std::out_of_range);
-    EXPECT_THROW(intBox.receive(1), std::out_of_range);
-    EXPECT_THROW(intBox.empty(1), std::out_of_range);
-    EXPECT_THROW(intBox.full(1), std::out_of_range);
-}
-
-TEST(MessageBoxTest, FullAndEmpty) {
-    // Test full and empty message boxes
-    MessageBox<std::string> stringBox(2);
-    EXPECT_TRUE(stringBox.empty());
-    stringBox.send(0, "Hello");
-    EXPECT_FALSE(stringBox.empty());
-    stringBox.send(1, "World");
-    EXPECT_TRUE(stringBox.full(0));
-    stringBox.receive(0);
-    EXPECT_FALSE(stringBox.full(0));
-    stringBox.receive(1);
-    EXPECT_TRUE(stringBox.empty());
-
-    MessageBox<int> intBox(2);
-    EXPECT_TRUE(intBox.empty());
-    intBox.send(0, 10);
-    EXPECT_FALSE(intBox.empty());
-    intBox.receive(0);
-    EXPECT_TRUE(intBox.empty());
-    intBox.send(0, 10);
-    intBox.send(1, 20);
-    EXPECT_FALSE(intBox.empty());
-    EXPECT_TRUE(intBox.full());
-    intBox.receive(0);
-    EXPECT_FALSE(intBox.empty());
-    EXPECT_TRUE(intBox.empty(0));
-    EXPECT_FALSE(intBox.empty(1));
-    intBox.receive(1);
-    EXPECT_TRUE(intBox.empty(1));
-    EXPECT_TRUE(intBox.empty());
-}
-
-TEST(MessageBoxTest, CountAndSize) {
-    // Test count and size of message box
-    MessageBox<std::string> stringBox(3);
-    EXPECT_EQ(stringBox.getSize(), 3);
-    EXPECT_EQ(stringBox.getCount(), 0);
-    stringBox.send(0, "Hello");
-    EXPECT_EQ(stringBox.getCount(), 1);
-    stringBox.send(1, "World");
-    EXPECT_EQ(stringBox.getCount(), 2);
-    stringBox.send(2, "!");
-    EXPECT_EQ(stringBox.getCount(), 3);
-
-    MessageBox<int> intBox(2);
-    EXPECT_EQ(intBox.getSize(), 2);
-    EXPECT_EQ(intBox.getCount(), 0);
-    intBox.send(0, 10);
-    EXPECT_EQ(intBox.getCount(), 1);
-    intBox.send(1, 20);
-    EXPECT_EQ(intBox.getCount(), 2);
-}
-
-TEST(MessageBoxTest, Print) {
-    // Test printing the message box
-    MessageBox<std::string> stringBox(3);
-    stringBox.send(0, "Hello");
-    stringBox.send(1, "World");
-    stringBox.send(2, "!");
-    testing::internal::CaptureStdout();
-    stringBox.print();
-    std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "Hello World !\n");
-
-    MessageBox<int> intBox(3);
-    intBox.send(0, 10);
-    intBox.send(1, 20);
-    testing::internal::CaptureStdout();
-    intBox.print();
-    output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "10 20\n");
-    // set up the Capture Stdout before each use, else segfault
-    testing::internal::CaptureStdout();
-    intBox.print_verbose();
-    output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "0:10:\n1:20:\n2:<empty>:\n");
+    return 0;
 }

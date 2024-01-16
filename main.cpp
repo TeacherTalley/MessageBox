@@ -3,7 +3,7 @@
 * @copyright
 * Copyright 2024 Michelle Talley University of Central Arkansas
 *
-* @author: Michelle Talley
+* @author: <student name>
 * @course: Data Structures (CSCI 2320)
 *
 * @file main.cpp
