@@ -30,7 +30,7 @@ jobs:
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_Style.sh"
         timeout: 10
-        max-score: 200
+        max-score: 10
     - name: Main Output
       id: main-output
       uses: classroom-resources/autograding-command-grader@v1
@@ -39,62 +39,62 @@ jobs:
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_OutputTest.sh"
         timeout: 10
-        max-score: 20
+        max-score: 15
     - name: MessageBox SendAndReceive
-      id: MessageBox-sendandreceive
+      id: messagebox-sendandreceive
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: MessageBox SendAndReceive
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.SendAndReceive"
         timeout: 10
-        max-score: 20
+        max-score: 15
     - name: MessageBox OutOfRange
-      id: MessageBox-outofrange
+      id: messagebox-outofrange
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: MessageBox OutOfRange
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.OutOfRange"
         timeout: 10
-        max-score: 20
+        max-score: 15
     - name: MessageBox FullAndEmpty
-      id: MessageBox-fullandempty
+      id: messagebox-fullandempty
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: MessageBox FullAndEmpty
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.FullAndEmpty"
         timeout: 10
-        max-score: 20
+        max-score: 15
     - name: MessageBox CountAndSize
-      id: MessageBox-countandsize
+      id: messagebox-countandsize
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: MessageBox CountAndSize
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.CountAndSize"
         timeout: 10
-        max-score: 20
+        max-score: 15
     - name: MessageBox Print
-      id: MessageBox-print
+      id: messagebox-print
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: MessageBox Print
         setup-command: ''
         command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.Print"
         timeout: 10
-        max-score: 20
+        max-score: 15
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         AUTOTEST-SETUP_RESULTS: "${{steps.autotest-setup.outputs.result}}"
         CODING-STYLE_RESULTS: "${{steps.coding-style.outputs.result}}"
         MAIN-OUTPUT_RESULTS: "${{steps.main-output.outputs.result}}"
-        MESSAGEBOX-SENDANDRECEIVE_RESULTS: "${{steps.MessageBox-sendandreceive.outputs.result}}"
-        MESSAGEBOX-OUTOFRANGE_RESULTS: "${{steps.MessageBox-outofrange.outputs.result}}"
-        MESSAGEBOX-FULLANDEMPTY_RESULTS: "${{steps.MessageBox-fullandempty.outputs.result}}"
-        MESSAGEBOX-COUNTANDSIZE_RESULTS: "${{steps.MessageBox-countandsize.outputs.result}}"
-        MESSAGEBOX-PRINT_RESULTS: "${{steps.sandbox-print.outputs.result}}"
+        MESSAGEBOX-SENDANDRECEIVE_RESULTS: "${{steps.messagebox-sendandreceive.outputs.result}}"
+        MESSAGEBOX-OUTOFRANGE_RESULTS: "${{steps.messagebox-outofrange.outputs.result}}"
+        MESSAGEBOX-FULLANDEMPTY_RESULTS: "${{steps.messagebox-fullandempty.outputs.result}}"
+        MESSAGEBOX-COUNTANDSIZE_RESULTS: "${{steps.messagebox-countandsize.outputs.result}}"
+        MESSAGEBOX-PRINT_RESULTS: "${{steps.messagebox-print.outputs.result}}"
       with:
-        runners: autotest-setup,coding-style,main-output,sandbox-sendandreceive,sandbox-outofrange,sandbox-fullandempty,sandbox-countandsize,sandbox-print
+        runners: autotest-setup,coding-style,main-output,messagebox-sendandreceive,messagebox-outofrange,messagebox-fullandempty,messagebox-countandsize,messagebox-print
