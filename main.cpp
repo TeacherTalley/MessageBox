@@ -39,11 +39,11 @@ int main()
         intMessageBox.send(3, 4);
         intMessageBox.send(5, 5);
 
-        floatMessageBox.send(0, (float) 1.1);
-        floatMessageBox.send(1, (float) 2.2);
-        floatMessageBox.send(2, (float) 0.0);
-        floatMessageBox.send(3, (float) 4.4);
-        floatMessageBox.send(6, (float) 5.5);
+        floatMessageBox.send(0, static_cast<float>(1.1));
+        floatMessageBox.send(1, static_cast<float>(2.2));
+        floatMessageBox.send(2, static_cast<float>(0.0));
+        floatMessageBox.send(3, static_cast<float>(4.4));
+        floatMessageBox.send(6, static_cast<float>(5.5));
 
         std::cout << std::endl
                   << "Testing toString() method and operator overloading."
