@@ -27,6 +27,9 @@ build
 # Mono auto generated files
 mono_crash.*
 
+# Ignore Visual Studio project specific build directory
+MessageBox/*
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
