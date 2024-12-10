@@ -28,7 +28,7 @@ jobs:
       with:
         test-name: Coding Style
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_Style.sh"
+        command: "./MessageBox_AutoTest/AutoTest_Style.sh MessageBox_AutoTest main.cpp MessageBox.h"
         timeout: 10
         max-score: 10
     - name: Main Output
@@ -37,7 +37,7 @@ jobs:
       with:
         test-name: Main Output
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_OutputTest.sh"
+        command: "./MessageBox_AutoTest/AutoTest_OutputTest.sh MessageBox_AutoTest/build"
         timeout: 10
         max-score: 15
     - name: MessageBox SendAndReceive
@@ -46,7 +46,7 @@ jobs:
       with:
         test-name: MessageBox SendAndReceive
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.SendAndReceive"
+        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBoxTest.SendAndReceive"
         timeout: 10
         max-score: 15
     - name: MessageBox OutOfRange
@@ -55,7 +55,7 @@ jobs:
       with:
         test-name: MessageBox OutOfRange
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.OutOfRange"
+        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBoxTest.OutOfRange"
         timeout: 10
         max-score: 15
     - name: MessageBox FullAndEmpty
@@ -64,7 +64,7 @@ jobs:
       with:
         test-name: MessageBox FullAndEmpty
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.FullAndEmpty"
+        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBoxTest.FullAndEmpty"
         timeout: 10
         max-score: 15
     - name: MessageBox CountAndSize
@@ -73,7 +73,7 @@ jobs:
       with:
         test-name: MessageBox CountAndSize
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.CountAndSize"
+        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBoxTest.CountAndSize"
         timeout: 10
         max-score: 15
     - name: MessageBox Print
@@ -82,7 +82,7 @@ jobs:
       with:
         test-name: MessageBox Print
         setup-command: ''
-        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBox.Print"
+        command: "./MessageBox_AutoTest/AutoTest_gtest.sh MessageBoxTest.Print"
         timeout: 10
         max-score: 15
     - name: Autograding Reporter
