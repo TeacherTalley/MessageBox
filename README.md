@@ -8,5 +8,7 @@ Contents:
 - **main.cpp**     - Main program producing required output for assignment
 - **tests.cpp**    - Test program where student can fully test MessageBox.
 - **.gitignore**   - Contains list of local files to ignore when committing to GitHub.
-- 
+
+ Force AutoTest...
+
 
